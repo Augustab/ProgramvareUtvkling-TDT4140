@@ -10,5 +10,12 @@ h5{
     text-align: center;
 }
 
-
+#logo {
+  background-image: url(../images/Hotell_logo.png);
+  display: block;
+  margin: 0 auto;
+  text-indent: -9999px;
+  width: 200px;
+  height: 200px;
+}
 
