@@ -4,23 +4,28 @@ body {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+  overflow-x: hidden;
 }
 
 #logo {
-  margin-left: 10%;
+  /*margin-left: 10%;
   margin-top: 5%;
+  position: relative;*/
+}
+
+#rad{
+  margin-top: 3%;
   position: relative;
 }
 
-#logg-inn {
-  margin-top: 5%;
 
-  position: relative;
+#logg-inn {
+
 }
 
 
 #col-hoyre > {
-  background-color: #005cbf;
+
 }
 
 #col-venstre{
