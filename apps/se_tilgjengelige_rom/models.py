@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Room(models.Model):
-    room_choices = [('S', 'Single Occupancy'), ('D', 'Double Occupancy'), ('P', 'Reserved for Research Scholars'),('B', 'Both Single and Double Occupancy')]
+    room_choices = [('S', 'Single Occupancy'), ('D', 'Double Occupancy'),('B', 'Both Single and Double Occupancy')]
 
     room_no = models.CharField(max_length=5)
     available = models.BooleanField(default=False)
@@ -24,7 +24,7 @@ class Guest(models.Model):
     rooms_booked = models.ForeignKey(Room, related_name='entries', blank=False)
 
     class Meta:
-        #managed = True
+        managed = True
         db_table = 'Guest'
 
 
@@ -39,7 +39,7 @@ class Admin(models.Model):
     realname = models.CharField(max_length=30, blank=True)
 
     class Meta:
-        #managed = True
+        managed = True
         db_table = 'Admin'
 
 
@@ -54,7 +54,7 @@ class Cleaner(models.Model):
     realname = models.CharField(max_length=30, blank=True)
 
     class Meta:
-        #managed = True
+        managed = True
         db_table = 'Cleaner'
 
 
@@ -66,7 +66,7 @@ class Booking(models.Model):
     cout_date = models.DateTimeField(db_column='COUT_Date', blank=True, null=True, verbose_name='Check-Out Date')  # Field name made lowercase.
 
     class Meta:
-        #managed = True
+        managed = True
         db_table = 'Booking'
 
 
