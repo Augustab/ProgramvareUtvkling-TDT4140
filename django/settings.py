@@ -50,6 +50,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'PUdjango.urls'
+CRISPY_TEMPLATE_PACK= 'bootstrap4'
 
 TEMPLATES = [
     {
