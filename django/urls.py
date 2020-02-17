@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("register/", v.register, name="register"),
     path('', include("django.urls")),
+    path('', include ('se_tilgjengelige_rom/urls')), #blir sendt videre til se_tilgjengelige_rom/urls.py
 ]
