@@ -19,7 +19,9 @@ from ..apps.register import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('.36.apps.se_tilgjengelige_rom.urls')), #blir sendt videre til se_tilgjengelige_rom/urls.py
     path("register/", v.register, name="register"),
-    path('', include("django.urls")),
-    path('', include ('se_tilgjengelige_rom/urls')), #blir sendt videre til se_tilgjengelige_rom/urls.py
+    path('register/', include("django.urls")),
+
 ]
+
