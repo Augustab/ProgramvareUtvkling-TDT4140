@@ -6,10 +6,10 @@ class Room(models.Model):
 
     room_no = models.CharField(max_length=5)
     available = models.BooleanField(default=False)
-    capacity = int
+    capacity = models.IntegerField(default=None)
     room_type = models.CharField(choices=room_choices, max_length=1, default=None)
 
-
+'''
 class Guest(models.Model):
     user = models.OneToOneField(User,default=None, null=True, on_delete=models.CASCADE)
 
@@ -21,7 +21,8 @@ class Guest(models.Model):
     realname = models.CharField(max_length=30, blank=True)
 
     room_allotted = models.BooleanField(default=False)
-    rooms_booked = models.ForeignKey(Room, related_name='entries', blank=False)
+    rooms_booked = models.ForeignKey(Room, related_name='entries', blank=False, on_delete=models.CASCADE
+    )
 
     class Meta:
         managed = True
@@ -68,5 +69,4 @@ class Booking(models.Model):
     class Meta:
         managed = True
         db_table = 'Booking'
-
-
+'''

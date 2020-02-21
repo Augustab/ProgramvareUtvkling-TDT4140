@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.register.apps.RegisterConfig',
+    '36.apps.se_tilgjengelige_rom',
 ]
 
 MIDDLEWARE = [
