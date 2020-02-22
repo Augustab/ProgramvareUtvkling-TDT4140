@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 
 def index(response):
-    return HttpResponse("<h1> HEI </h1>")
+    return HttpResponse("<h1>NY ENDRING</h1>")
 
 
 def home(response):
