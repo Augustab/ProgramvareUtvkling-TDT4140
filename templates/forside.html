@@ -10,8 +10,8 @@ Skikkelig Fancy Hotell
     <link rel="stylesheet" type="text/css" href="{% static "css/forside.css" %}">
 {% endblock %}
 
-
 {% load crispy_forms_tags %}
+
 
 {% block content%}
     <div id="rad">
@@ -24,7 +24,6 @@ Skikkelig Fancy Hotell
                   </div>
             </div>
             <div class="col-sm-4"></div>
-
             <div  class = "col-sm-2">
                 <div class="text-center">
                     <a href="/signup"><button type="button" class="btn btn-outline-dark" id="logg-inn" >Lag bruker</button></a>
@@ -43,101 +42,23 @@ Skikkelig Fancy Hotell
                     </div>
                 </div>
             {%endif%}
-
         </div>
     </div>
-
-    <div id="mellomrom"></div>
 
     <div id="rad2">
         <div class="row">
             <div class="col-sm-1" ></div>
-                <div class="col-sm-10" >
-                    <!--<script type="text/javascript">
-                        $('#sandbox-container .input-daterange').datepicker({
-                        });
-                    </script>
-                    <div class="input-daterange input-group" id="datepicker">
-                        <input type="text" class="input-sm form-control" name="start" />
-                        <span class="input-group-addon">to</span>
-                        <input type="text" class="input-sm form-control" name="end" />
-                    </div>
-                    <input type="text" class="input-sm" name="start" placeholder="Stardato"/>
-                    <span class="input-group-addon">til</span>
-                    <input type="text" class="input-sm" name="start" placeholder="Sluttdato"/>
-                    <button  type="submit" class="btn btn-primary">Se tilgjengelige rom</button>-->
-                    <label for="pwd">Her velger du dato for oppholdet:</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Startdato" name="startdato">
-                    <label for="pwd">Til</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Sluttdato" name="sluttdato">
-                    <button type="submit" class="btn btn-primary" >Submit</button>
-
+                <div class="col-sm-10" id="whitebox" >
+                    <h5>Her velger du dato for oppholdet:</h5>
+                    <input type="password" class="form-control"  placeholder="Startdato" name="startdato">
+                    <h5>Til:</h5>
+                    <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
+                    <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
+                    <input type="password" class="form-control"  placeholder="Sluttdato" name="sluttdato">
+                    <a href="/se_rom"><button type="submit" class="btn btn-primary" >Se tilgjengelige rom</button></a>
                 </div>
             <div class="col-sm-1"></div>
         </div>
     </div>
-
-    <!--<div id="bakgrunn">
-        <div id="welcomeDiv"  class="answer_list" >
-            <div class="container">
-              <h3>Lag deg en booking-profil her:</h3>
-              <form action="/action_page.php">
-                <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                </div>
-                <div class="form-group">
-                  <label for="pwd">Password:</label>
-                  <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-                </div>
-                <div class="form-group form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                  </label>
-                </div>
-                <button type="submit" class="btn btn-primary" onclick="closeDiv()">Submit</button>
-              </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="bakgrunn2">
-        <div id="welcomeDiv2"  class="answer_list">
-            <div class="container">
-                <h3>Logg deg inn her:</h3>
-                <form action="/action_page.php">
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control"  placeholder="Enter email" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="pwd">Password:</label>
-                        <input type="password" class="form-control" placeholder="Enter password" name="pswd">
-                    </div>
-                    <div class="form-group form-check">
-                        <label class="form-check-label"><input class="form-check-input" type="checkbox" name="remember"> Remember me</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary" onclick="closeDiv()">Submit</button>
-                    <button type="submit" class="btn btn-primary" onclick="closeDiv()" id="lukk">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>-->
-
-
-    <script>
-        function showDiv() {
-            document.getElementById('bakgrunn').style.display = "block";
-        }
-
-        function showDiv2() {
-            document.getElementById('bakgrunn2').style.display = "block";
-        }
-
-        function closeDiv() {
-            document.getElementById('bakgrunn').style.display = "none";
-        }
-    </script>
-
 {% endblock %}
 

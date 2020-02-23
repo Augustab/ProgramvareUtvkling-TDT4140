@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', v.signup, name="signup"),
     path('home/', v2.home, name="home"),
+    path('se_rom/', v2.se_rom, name="se_rom"),
     path("indeksen/", v2.index, name="index"),
     path('', v2.redirect, name="homeredirectfraingenting"),
     path('', include("django.contrib.auth.urls")),

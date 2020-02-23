@@ -7,75 +7,21 @@ body {
   overflow-x: hidden;
 }
 
-#logo {
-  /*margin-left: 10%;
-  margin-top: 5%;
-  position: relative;*/
-}
-
 #rad{
   margin-top: 3%;
   position: relative;
-  margin-bottom: 26%;
+  margin-bottom: 22%;
 }
 
-#mellomrom{
-  height: 20%;
-  width: 100%;
-}
 
 #logg-inn {
   position: relative;
   margin-top: 10%;
 }
 
-#bakgrunn{
-  background-color: rgba(0, 0, 0, .4);
-  position:fixed;
-  width:100%;
-  height:100%;
-  top:0px;
-  left:0px;
-  z-index:1000;
-  display: none;
-}
-
-#welcomeDiv{
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  width: 50%;
-  height: 40%;
-  top: 20%;
-  left: 25%;
-  position: relative;
-  z-index: 1400;
-
-}
-
-#bakgrunn2{
-  background-color: rgba(0, 0, 0, .4);
-  position:fixed;
-  width:100%;
-  height:100%;
-  top:0px;
-  left:0px;
-  z-index:1000;
-  display: none;
-}
-
-#welcomeDiv2{
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  width: 50%;
-  height: 40%;
-  top: 20%;
-  left: 25%;
-  position: relative;
-  z-index: 1400;
-
-}
 .col-sm-10{
   background-color: rgba(255,255,255, 0.7);
+  border-radius: 20px;
 }
 
 .input-sm {
@@ -83,16 +29,11 @@ body {
   position: relative;
 }
 
-#bestill{
-  background-color: white;
+.form-control{
+  position: relative;
+  margin-bottom: 1%;
 }
 
-
-
-#col-hoyre > {
-
-}
-
-#col-venstre{
-
+#whitebox{
+  padding: 1%;
 }
