@@ -1,11 +1,17 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, reverse
+from django.http import HttpResponse, HttpResponsePermanentRedirect
+
+
 # Create your views here.
 
-
+##denne var bare for å teste
 def index(response):
     return HttpResponse("<h1>NY ENDRING</h1>")
 
-
+##denne må vi ha, den tegner selve forsiden.
 def home(response):
     return render(response, "../templates/forside.html")
+
+##Denne funksjonen sørger for at dersom du ikke har skrevet noe i url-en (dvs = "http://127.0.0.1:8000/") så skal du redirectes til http://127.0.0.1:8000/home/ dette fordi vi vil at brukerene skal være på hjem siden når man starter programmet.
+def redirect(request):
+    return HttpResponsePermanentRedirect(reverse('home'))

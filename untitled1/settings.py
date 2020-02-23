@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+####### SE I BUNN FOR NY KODE
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -123,7 +125,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+######## kodelinjene under (staticfiles..) gjør at django klarer å finne static-mappen vår. OM vi ikke har med den vil den ikke finne staticfilene.
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
 CRISPY_TEMPLATE_PACK="bootstrap4"
+
+##Disse to linjene sier hvor django skal gå etter /login og /logout, som er to innebygde sider som nå er lagt til.
 
 LOGIN_REDIRECT_URL = "/home"
 LOGOUT_REDIRECT_URL = "/home"

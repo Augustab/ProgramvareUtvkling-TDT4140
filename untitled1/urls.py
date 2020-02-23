@@ -23,6 +23,6 @@ urlpatterns = [
     path('signup/', v.signup, name="signup"),
     path('home/', v2.home, name="home"),
     path("indeksen/", v2.index, name="index"),
-    path('', include("main.urls")),
+    path('', v2.redirect, name="homeredirectfraingenting"),
     path('', include("django.contrib.auth.urls")),
 ]
