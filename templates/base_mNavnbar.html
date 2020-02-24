@@ -9,26 +9,24 @@
 <body>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="height: 100px">
-  <!-- Brand -->
-  <a class="navbar-brand" href="{% url 'home' %}" style="color: beige">Forside</a>
 
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="#" style="margin-top: 82px;color: beige">Dato</a>
+      <input class="nav-link" type="date" style="margin-top: 82px;color: black;width: 160px;height: 39px"> </input>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" style="margin-top: 82px;color: beige" >Dato</a>
+      <input class="nav-link" type="date" style="margin-top: 82px;color: black;width: 160px;height: 39px"></input>
     </li>
 
     <li>
-         <div class="form-group" style="margin-top: 84px; margin-left: 30px" >
-            <input type="text" class="form-control" id="antall_personer" placeholder="Antall Personer">
+         <div class="form-group" style="margin-top: 84px; margin-left: 10px;width: 100px" >
+            <input type="number" class="form-control" id="antall_personer" placeholder="Gjester">
         </div>
     </li>
 
     <li>
-        <a href="{% url 'home' %}" id="logo" style="margin-left: 90px"> </a>
+        <a href="{% url 'home' %}" id="logo" style="margin-left: 100px"> </a>
     </li>
 
     <li>
