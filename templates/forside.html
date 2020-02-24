@@ -1,6 +1,7 @@
 {%  extends "base.html" %}
 {% load static %}
 
+
 {% block title %}
 Skikkelig Fancy Hotell
 {% endblock %}
@@ -29,6 +30,9 @@ Skikkelig Fancy Hotell
                     <a href="/signup"><button type="button" class="btn btn-outline-dark" id="logg-inn" >Lag bruker</button></a>
                 </div>
             </div>
+
+
+
             {%if user.is_authenticated%}
                 <div class = "col-sm-2" >
                     <div class="text-center">
