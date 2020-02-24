@@ -66,6 +66,27 @@ Skikkelig Fancy Hotell
             </div>
         </div>
     </div>
+
+
+<h4>Tilgjengelige rom</h4>
+<table>
+    <tr>
+        <th>Room No.</th>
+        <th>Available</th>
+        <th>Capacity</th>
+        <th>Room Type</th>
+    </tr>
+    {% for item in list_of_rooms %}
+    <tr>
+        <td>{{ item.room_no }}</td>
+        <td>{{ item.available }}</td>
+        <td>{{ item.capacity }}</td>
+        <td>{{ item.room_type }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
 {% endblock %}
 
 
