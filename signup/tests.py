@@ -26,7 +26,7 @@ class UserViewsTest(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_login_view(self):  # tester om man blir sendt til riktig sted når man trykker på 'logg inn'-knapp
+    def test_login_view(self):  # tester 'logg inn'-siden
         response = self.client.get("/login/")
         self.assertEqual(response.status_code, 200)  # 200 er HTTP OK
         self.assertTemplateUsed(response, "registration/login.html")
@@ -38,7 +38,7 @@ class UserViewsTest(TestCase):
         logged_in = self.client.login(username="testuser2", password='123password')
         self.assertTrue(logged_in)
 
-    def test_signup_view(self):  # tester om man blir sendt til riktig sted når man trykker 'lag bruker'-knapp
+    def test_signup_view(self):  # tester registreringssiden
         response = self.client.get("/signup/")
         self.assertEqual(response.status_code, 200)  # 200 er HTTP OK
         self.assertTemplateUsed(response, "register/register.html")
