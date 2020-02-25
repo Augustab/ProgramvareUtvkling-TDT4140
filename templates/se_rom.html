@@ -68,26 +68,79 @@ Skikkelig Fancy Hotell
         </div>
     </div>
 
-<br>
+<div class="row" id="rad1">
+    <div class="col-sm-6" id="whitebox" >
+        <form method="POST" name="dato_form" action="{% url 'se_rom' %}">
+            {% csrf_token %}
+            <p>Innsjekk : {{ req_startdate }}, utsjekk : {{ req_sluttdate }}</p>
+            <input type="date" class="form-control"  placeholder="{{ req_startdate }}" name="startdato">
+
+            <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
+            <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
+            <input type="date" class="form-control"  placeholder="{{ req_startdate }}" name="sluttdato"  >
+            <input type="number" class="form-control"  placeholder="Antall" name="sluttdato" >
+            <button type="submit" name="Se_tigjengelige_rom" class="btn btn-primary" >Se tilgjengelige rom</button>
+        </form>
+    </div>
+
+    <div class="col-sm-6">
+        <h4>Tilgjengelige rom</h4>
+        <table>
+        <tr>
+            <th>Room No.</th>
+            <th>Capacity</th>
+            <th>Room Type</th>
+        </tr>
+        {% for item in available_rooms %}
+            <tr>
+            <td>{{ item.room_no }}</td>
+            <td>{{ item.capacity }}</td>
+            <td>{{ item.room_type }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6" id="whitebox" >
+        <form method="POST" name="bestill_form" action="{% url 'booking' %}">
+            {% csrf_token %}
+            <input type="date" class="form-control"  placeholder="{{ req_startdate }}" name="startdato">
+
+            <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
+            <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
+            <input type="date" class="form-control"  placeholder="{{ req_startdate }}" name="sluttdato"  >
+            <input type="number" class="form-control"  placeholder="Antall" name="sluttdato" >
+            <input type="text" class="form-control"  placeholder="S/D/B" name="startdato" >
 
 
+            <button type="submit" name="bestill" class="btn btn-primary"  >Bestill</button>
+        </form>
+    </div>
+    <div class="col-sm-6"></div>
 
-<h4>Tilgjengelige rom</h4>
-<table>
-    <tr>
-        <th>Room No.</th>
-        <th>Capacity</th>
-        <th>Room Type</th>
-    </tr>
-    {% for item in available_rooms %}
-    <tr>
-        <td>{{ item.room_no }}</td>
-        <td>{{ item.capacity }}</td>
-        <td>{{ item.room_type }}</td>
-    </tr>
-    {% endfor %}
+</div>
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
 
-</table>
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
 
 {% endblock %}
 
