@@ -2,7 +2,6 @@ from django.shortcuts import render, reverse
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from .models import Room
 
-
 # Create your views here.
 
 # denne var bare for å teste

@@ -24,7 +24,14 @@ Skikkelig Fancy Hotell
                          </a>
                   </div>
             </div>
-            <div class="col-sm-4"></div>
+            <div class = "col-sm-2"></div>
+            <div class="col-sm-2">
+                {% if user.is_superuser %}
+                    <div class="text-center">
+                    <a href="/admin"><button type="button" class="btn btn-outline-dark" id="logg-inn">Gå til admin</button></a>
+                    </div>
+                {% endif %}
+            </div>
             <div  class = "col-sm-2">
                 <div class="text-center">
                     <a href="/signup"><button type="button" class="btn btn-outline-dark" id="logg-inn" >Lag bruker</button></a>
