@@ -1,7 +1,12 @@
-body{
+body {
 
-    background-image: linear-gradient(to bottom, #e3ded4, #e4dfd7, #e4e0da, #e5e2dd, #e5e3e0);
+  background-image: linear-gradient(to bottom, #e3ded4, #e4dfd7, #e4e0da, #e5e2dd, #e5e3e0);
 
+}
+.card{
+  height: 15%;
+  margin: 4%;
+  padding: 2%;
 }
 h2{
     text-align: center;
@@ -12,8 +17,15 @@ p{
 h5{
     text-align: center;
 }
+.form-control{
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+#plasseribunn{
+  position: relative;
+  bottom: 0;
+}
 #logo {
-  background-image: url("../images/Hotell_logo.png");
   display: block;
   margin: 0 auto;
   text-indent: -9999px;

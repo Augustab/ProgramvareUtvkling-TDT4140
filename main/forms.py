@@ -3,19 +3,18 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class DateForm(forms.Form):
-    req_startdato = forms.DateField()
-    req_sluttdato = forms.DateField()
+    req_startdate = forms.DateField
+    req_sluttdate = forms.DateField
     req_cap = forms.IntegerField()
 
     class Meta:
-        fields = ["req_startdato", "req_sluttdato", "req_cap"]
+        fields = ['req_startdate', 'req_sluttdate', 'req_cap']
 
 
-class BestillForm(forms.Form):
-    req_startdato = forms.DateField()
-    req_sluttdato = forms.DateField()
-    req_cap = forms.IntegerField()
-    req_roomType = forms.CharField()
+class BookingForm(forms.Form):
+    req_startdate = forms.DateField
+    req_sluttdate = forms.DateField
+    req_room_type = forms.CharField
 
-    class Meta:
-        fields = ["req_startdato", "req_sluttdato", "req_cap", "req_roomType"]
+    class Meta2:
+        fields = ["req_startdate", "req_sluttdate", "req_room_type"]
