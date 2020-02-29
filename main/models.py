@@ -15,6 +15,8 @@ class Room(models.Model):
 
 
 class Booking(models.Model):
+    defaultRom = Room.objects.get(room_no='100')
+    defaultRomID = defaultRom.id
     room_choices = [('S', 'Single Occupancy'), ('D', 'Double Occupancy'), ('F', 'Firemannsrom')]
     bookingid = models.AutoField(db_column='BookingID', primary_key=True)  # Field name made lowercase.
     guest = models.ForeignKey('auth.User', on_delete=models.CASCADE, )  # eller settings.AUTH_USER_MODEL
@@ -23,11 +25,11 @@ class Booking(models.Model):
     cout_date = models.DateField(db_column='COUT_Date', blank=True, null=True,
                                      verbose_name='Check-Out Date')  # Field name made lowercase.
     room_type = models.CharField(choices=room_choices, max_length=1, default=None)
-    ##room = models.ForeignKey('Room', models.DO_NOTHING, db_column='Room', default='1')
+    room = models.ForeignKey('Room', models.DO_NOTHING, db_column='Room', default=defaultRomID)
 
     class Meta:
         managed = True
         db_table = 'Booking'
 
     def __str__(self):
-        return "Bruker: " + self.guest.__str__() + " -- id:" + str(self.bookingid) + " -- Inndato: " +  self.cin_date.__str__() + " -- Utdato: " + self.cout_date.__str__()
+        return "Bruker: " + self.guest.__str__() + " -- id:" + str(self.bookingid) + " -- Inndato: " +  self.cin_date.__str__() + " -- Utdato: " + self.cout_date.__str__() + " -- " + self.room.__str__()

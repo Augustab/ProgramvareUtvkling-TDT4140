@@ -40,16 +40,23 @@ def booking(request):
     req_startdate = 0
     req_sluttdate = 0
     req_room_type = 0
+    assigned_room_nr = 100
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
             req_startdate = form.data.get('req_startdate')
             req_sluttdate = form.data.get('req_sluttdate')
             req_room_type = form.data.get('req_room_type')
-
-
-
-            new_booking = Booking(guest = request.user, cin_date = req_startdate, cout_date = req_sluttdate, room_type = req_room_type)
+            if (req_room_type == "S"):
+                assigned_rooms = list(Room.objects.filter(room_type='S'))
+                assigned_room_nr = assigned_rooms[0]
+            elif (req_room_type == "D"):
+                assigned_rooms = list(Room.objects.filter(room_type='D'))
+                assigned_room_nr = assigned_rooms[0]
+            else:
+                assigned_rooms = list(Room.objects.filter(room_type='F'))
+                assigned_room_nr = assigned_rooms[0]
+            new_booking = Booking(guest = request.user, cin_date = req_startdate, cout_date = req_sluttdate, room_type = req_room_type, room=assigned_room_nr)
             new_booking.save()
     context = {'req_startdate': req_startdate, 'req_sluttdate': req_sluttdate, 'req_room_type': req_room_type, 'req_cap': 1}
     return render(request, "../templates/se_rom.html", context)
