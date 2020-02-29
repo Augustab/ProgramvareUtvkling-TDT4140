@@ -11,12 +11,19 @@ Skikkelig Fancy Hotell
 {% endblock %}
 
 {% block content%}
+    <div class="row" style="margin-top: 2%">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 text-center"><h4>Viser tilgjengelige rom for innsjekk: {{ req_startdate }}, utsjekk : {{ req_sluttdate }} og antall: {{ req_cap }}</h4></div>
+        <div class="col-sm-1"></div>
+
+    </div>
+
 
     <div class="row">
-        {% if req_cap <= 1 %}
-        <div class="col-sm-3 card">
+        {% if req_cap <= 1%}
+        <div class="col-sm-3 card bg-light">
         {% else %}
-        <div class="col-sm-3 card" style="border: black">
+        <div class="col-sm-3 card " >
         {% endif %}
             <img class="card-img-top" src="../static/images/standard_singel.jpg" alt="Card image cap">
             <div class="card-body">
@@ -28,15 +35,17 @@ Skikkelig Fancy Hotell
 
                 </p>
                 <div class="row">
+                    {% if req_cap <= 1%}
                     <a type="button" style="margin-top: 26px;margin-left: 10px" href="#" class="btn btn-outline-secondary">Bestill</a>
+                    {% endif %}
                     <p style="margin-left: 80px; margin-top: 26px; color: #5a6268;"> 1460 <small> NOK/natt</small></p>
                 </div>
             </div>
         </div>
         {% if req_cap <= 2 %}
-        <div class="col-sm-3 card">
+        <div class="col-sm-3 card bg-light">
         {% else %}
-        <div class="col-sm-3 card" style="border: black">
+        <div class="col-sm-3 card " >
         {% endif %}
             <img class="card-img-top" src="../static/images/dobbelrom.jpg" alt="Card image cap">
             <div class="card-body">
@@ -47,15 +56,17 @@ Skikkelig Fancy Hotell
                     <li style="margin-left: 12px">Inkludert frokost</li>
                 </p>
                 <div class="row">
+                    {% if req_cap <= 2%}
                     <a type="button" href="#" style="margin-left: 10px" class="btn btn-outline-secondary">Bestill</a>
+                    {% endif %}
                     <p style="margin-left: 80px; color: #5a6268;"> 2100 <small> NOK/natt</small></p>
                 </div>
             </div>
         </div>
         {% if req_cap <= 4 %}
-        <div class="col-sm-3 card">
+        <div class="col-sm-3 card bg-light">
         {% else %}
-        <div class="col-sm-3 card" style="background-color: rgba(255,255,255, 0.7)">
+        <div class="col-sm-3 card " >
         {% endif %}
             <img class="card-img-top" src="../static/images/superior.jpg" alt="Card image cap" style="height:46.5%">
             <div class="card-body">
@@ -66,7 +77,9 @@ Skikkelig Fancy Hotell
                     <li style="margin-left: 12px">Inkludert frokost</li>
                 </p>
                 <div class="row">
+                    {% if req_cap <= 4%}
                     <a type="button" href="#" style="margin-left: 10px" class="btn btn-outline-secondary">Bestill</a>
+                    {% endif %}
                     <p style="margin-left: 80px;color: #5a6268;"> 3400 <small> NOK/natt</small></p>
                 </div>
             </div>
@@ -137,11 +150,11 @@ Skikkelig Fancy Hotell
 
 
 <div class="row" style="margin-top: 2%">
-    <div class="col-sm-6" id="whi   tebox" >
-        <h4>Viser tilgjengelige rom for innsjekk: {{ req_startdate }}, utsjekk : {{ req_sluttdate }} og antall: {{ req_cap }}</h4>
+    <div class="col-sm-6" id="whitebox" >
+
         <form method="POST" name="DateForm" action="{% url 'se_rom' %}">
             {% csrf_token %}
-
+            <h4>Her kan du endre søket ditt:</h4>
             <input type="date" class="form-control"  name="req_startdate">
             <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
             <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
@@ -151,13 +164,13 @@ Skikkelig Fancy Hotell
         </form>
         <div id="plasseribunn">
             <h4 style="margin-top: 1%">Her kan du bestille ett av rommene:</h4>
-            <form method="POST" name="bestill_form" action="{% url 'booking' %}">
+            <form method="POST" name="BookingForm" action="{% url 'booking' %}">
                 {% csrf_token %}
-                <input type="date" class="form-control"  placeholder="{{ req_startdate }}" name="startdato">
+                <input type="date" class="form-control" name="req_startdate">
 
                 <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
                 <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
-                <input type="date" class="form-control"  placeholder="{{ req_startdate }}" name="sluttdato">
+                <input type="date" class="form-control"  name="req_sluttdate">
                 <input type="text" class="form-control"  placeholder="S/D/F (singel/dobbel/firemanns)" name="req_room_type" >
 
 
@@ -192,7 +205,7 @@ Skikkelig Fancy Hotell
 
     <script>
         /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
+        toggle between hiding and showing the drodown content */
         function myFunction() {
           document.getElementById("myDropdown").classList.toggle("show");
         }

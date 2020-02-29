@@ -48,15 +48,15 @@ def booking(request):
             req_room_type = form.data.get('req_room_type')
 
 
-            context = {'req_startdate': req_startdate, 'req_sluttdate': req_sluttdate, 'req_room_type' : req_room_type}
+
             new_booking = Booking(guest = request.user, cin_date = req_startdate, cout_date = req_sluttdate, room_type = req_room_type)
             new_booking.save()
-        '''
-            return redirect("/reservation_success", context)
-        else:
-            return redirect("/reservation_fail")'''
-    return render(request, "../templates/se_rom.html")
-
+    context = {'req_startdate': req_startdate, 'req_sluttdate': req_sluttdate, 'req_room_type': req_room_type, 'req_cap': 1}
+    return render(request, "../templates/se_rom.html", context)
+    '''
+                return redirect("/reservation_success", context)
+            else:
+                return redirect("/reservation_fail")'''
 
 # Denne funksjonen sørger for at dersom du ikke har skrevet noe i url-en (dvs = "http://127.0.0.1:8000/") så skal du
 # redirectes til http://127.0.0.1:8000/home/ dette fordi vi vil at brukerene skal være på hjem siden når man starter
