@@ -56,7 +56,7 @@ def booking(request):
             else:
                 assigned_rooms = list(Room.objects.filter(room_type='F'))
                 assigned_room_nr = assigned_rooms[0]
-            new_booking = Booking(guest = request.user, cin_date = req_startdate, cout_date = req_sluttdate, room_type = req_room_type, room=assigned_room_nr)
+            new_booking = Booking(guest = request.user, cin_date = req_startdate, cout_date = req_sluttdate, room_type = req_room_type, room = assigned_room_nr)
             new_booking.save()
     context = {'req_startdate': req_startdate, 'req_sluttdate': req_sluttdate, 'req_room_type': req_room_type, 'req_cap': 1}
     return render(request, "../templates/se_rom.html", context)

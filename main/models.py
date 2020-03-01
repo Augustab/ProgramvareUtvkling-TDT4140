@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 class Room(models.Model):
     room_choices = [('S', 'Single Occupancy'), ('D', 'Double Occupancy'), ('F', 'Firemannsrom')]
-
     room_no = models.CharField(max_length=5)  # primary key
     available = models.BooleanField(default=False)
     capacity = models.IntegerField(default=None)
