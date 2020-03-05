@@ -9,7 +9,6 @@ from .forms import DateForm, BookingForm, CancelForm
 def home(response):
     return render(response, "../templates/forside.html")
 
-
 # denne må vi ha, den tegner se_rom.
 def se_rom(request):
     req_startdate = 0
