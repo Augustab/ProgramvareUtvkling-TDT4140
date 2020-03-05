@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+<!--SE I BUNN for message-funksjonaliteten-->
+
 {% block title %}Mine bestillinger{% endblock %}
 {% block style %}
     <link rel="stylesheet" href="../static/css/register.css">
@@ -42,6 +44,7 @@
                     <td >
                         <form method="POST" name="CancelForm" action="{% url 'slett_booking' %}" >
                             {% csrf_token %}
+                            <!--HER ER DEN skjulte inputen som jeg snakket om. Den har value lik booking.id'n til den gjeldende bestillingen-->
                             <input type="number" value="{{ item.bookingid }}" style="display: none" name="bookingid">
                             <button type="submit" name="Slett_bestilling" class="btn btn-light text-center" >Avbestill</button>
                         </form>
@@ -52,6 +55,7 @@
         </div>
         <div class="col-sm-1"></div>
     </div>
+<!--DET EE denne koden som sørger for at messages blir displayed om de finnes!!! -->
 
     {% if messages %}
    <script>
