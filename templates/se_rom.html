@@ -13,7 +13,11 @@ Skikkelig Fancy Hotell
 {% block content%}
     <div class="row" style="margin-top: 2%">
         <div class="col-sm-1"></div>
-        <div class="col-sm-10 text-center"><h4>Viser tilgjengelige rom for innsjekk: {{ req_startdate }}, utsjekk : {{ req_sluttdate }} og antall: {{ req_cap }}</h4></div>
+        {% if req_startdate != 0 and req_sluttdate != 0 and req_cap != 0  %}
+            <div class="col-sm-10 text-center"><h4>Viser tilgjengelige rom for innsjekk: {{ req_startdate }}, utsjekk : {{ req_sluttdate }} og antall: {{ req_cap }}</h4></div>
+        {% else%}
+            <div class="col-sm-10 text-center"></div>
+        {% endif %}
         <div class="col-sm-1"></div>
 
     </div>
@@ -39,7 +43,7 @@ Skikkelig Fancy Hotell
                     {% if req_cap <= 1%}
                     <a type="button" style="margin-top: 26px;margin-left: 10px" href="#" class="btn btn-outline-secondary">Tilgjengelig</a>
                     {% endif %}
-                    <p style="margin-left: 40px; margin-top: 26px; color: #5a6268;"> 1460 <small> NOK/natt</small></p>
+                    <p style="margin-left: 40px; margin-top: 26px; color: #5a6268;"> {{ price1 }} <small> NOK/natt</small></p>
                 </div>
             </div>
         </div>
@@ -60,7 +64,7 @@ Skikkelig Fancy Hotell
                     {% if req_cap <= 2%}
                     <a type="button" href="#" style="margin-left: 10px" class="btn btn-outline-secondary">Tilgjengelig</a>
                     {% endif %}
-                    <p style="margin-left: 40px; color: #5a6268;"> 2100 <small> NOK/natt</small></p>
+                    <p style="margin-left: 40px; color: #5a6268;"> {{ price2 }} <small> NOK/natt</small></p>
                 </div>
             </div>
         </div>
@@ -81,7 +85,7 @@ Skikkelig Fancy Hotell
                     {% if req_cap <= 4%}
                     <a type="button" href="#" style="margin-left: 10px" class="btn btn-outline-secondary">Tilgjengelig</a>
                     {% endif %}
-                    <p style="margin-left: 40px;color: #5a6268;"> 3400 <small> NOK/natt</small></p>
+                    <p style="margin-left: 40px;color: #5a6268;"> {{ price3 }} <small> NOK/natt</small></p>
                 </div>
             </div>
         </div>
@@ -233,6 +237,14 @@ Skikkelig Fancy Hotell
 
 </div>
 
+
+    {% if messages %}
+   <script>
+    {% for message in messages %}
+        alert("{{ message }}");
+    {% endfor %}
+   </script>
+    {% endif %}
 
 
     <script>

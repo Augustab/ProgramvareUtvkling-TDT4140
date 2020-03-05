@@ -18,3 +18,10 @@ class BookingForm(forms.Form):
 
     class Meta2:
         fields = ["req_startdate", "req_sluttdate", "req_room_type"]
+
+
+class CancelForm(forms.Form):
+    bookingid = forms.IntegerField
+
+    class Meta3:
+        fields = ["bookingid"]

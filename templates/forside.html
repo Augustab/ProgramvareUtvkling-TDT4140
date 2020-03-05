@@ -37,6 +37,10 @@ Skikkelig Fancy Hotell
                     <div class="text-center">
                     <a href="/admin"><button type="button" class="btn btn-outline-dark" id="logg-inn">Gå til admin</button></a>
                     </div>
+                {% elif user.is_authenticated %}
+                    <div class="text-center">
+                    <a href="/se_bestillinger"><button type="button" class="btn btn-outline-dark" id="logg-inn">Se bestillinger</button></a>
+                    </div>
                 {% endif %}
             </div>
 

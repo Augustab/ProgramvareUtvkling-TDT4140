@@ -8,23 +8,24 @@ class Room(models.Model):
     available = models.BooleanField(default=False)
     capacity = models.IntegerField(default=None)
     room_type = models.CharField(choices=room_choices, max_length=1, default=None)
+    price = models.IntegerField( blank=True, null=True)
 
     def __str__(self):
         return "Romnr: " + str(self.room_no) + " -- type:" + str(self.room_type)
 
 
 class Booking(models.Model):
-    defaultRom = Room.objects.get(room_no='100')
-    defaultRomID = defaultRom.id
+    #defaultRom = Room.objects.get(room_no='100')
+    #defaultRomID = defaultRom.id
     room_choices = [('S', 'Single Occupancy'), ('D', 'Double Occupancy'), ('F', 'Firemannsrom')]
     bookingid = models.AutoField(db_column='BookingID', primary_key=True)  # Field name made lowercase.
-    guest = models.ForeignKey('auth.User', on_delete=models.CASCADE, )  # eller settings.AUTH_USER_MODEL
+    guest = models.ForeignKey('auth.User', on_delete=models.CASCADE)  # eller settings.AUTH_USER_MODEL
     cin_date = models.DateField(db_column='CIN_Date', blank=True, null=True,
                                     verbose_name='Check-In Date')  # Field name made lowercase.
     cout_date = models.DateField(db_column='COUT_Date', blank=True, null=True,
                                      verbose_name='Check-Out Date')  # Field name made lowercase.
     room_type = models.CharField(choices=room_choices, max_length=1, default=None)
-    room = models.ForeignKey('Room', models.DO_NOTHING, db_column='Room', default=defaultRomID)
+    room = models.ForeignKey('Room', on_delete=models.CASCADE, db_column='Room', default=None)
 
     class Meta:
         managed = True
