@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.contrib import messages
 from .models import Room, Booking
 from .forms import DateForm, BookingForm, CancelForm
+from datetime import datetime, timedelta
 
 
 # denne må vi ha, den tegner selve forsiden.
@@ -22,21 +23,28 @@ def se_rom(request):
             req_startdate = form.data.get('req_startdate')
             req_sluttdate = form.data.get('req_sluttdate')
             req_cap = int(form.data.get('req_cap'))
-    available_rooms = Room.objects.filter(available=True)
-    # Her går jeg gjennom de x antall romtypene, og setter prisen deres.
-    for ix in range(len(room_chars)):
-        # henter ut de aktuelle rommene av denne typen
-        assigned_rooms_type = list(Room.objects.filter(room_type=room_chars[ix]))
-        try:
-            # velger det første av disse aktuelle rommene, og henter prisen til det rommet.
-            prices[ix] = assigned_rooms_type[0].price
-        except:
-            continue
-    # sender de tre pris-verdiene inn i context. PRØVDE å sende alle inn i en liste, men da klarer jeg ikke hente de
-    # ut på html-siden.
-    context = {'available_rooms': available_rooms, 'req_startdate': req_startdate, 'req_sluttdate': req_sluttdate,
-               'req_cap': req_cap, 'price1': prices[0], 'price2': prices[1], 'price3': prices[2]}
-    return render(request, "../templates/se_rom.html", context)
+    if req_startdate is None or req_sluttdate is None or req_cap == 0:
+        messages.warning(request, "Du må fylle inn alle feltene for å se tilgjengelige rom")
+        return render(request, "../templates/forside.html")
+    elif not check_legal_dates(req_startdate, req_sluttdate):
+        messages.warning(request, "Datovalget ditt er ikke gyldig.")
+        return render(request, "../templates/forside.html")
+    else:
+        available_rooms = Room.objects.filter(available=True)
+        # Her går jeg gjennom de x antall romtypene, og setter prisen deres.
+        for ix in range(len(room_chars)):
+            # henter ut de aktuelle rommene av denne typen
+            assigned_rooms_type = list(Room.objects.filter(room_type=room_chars[ix]))
+            try:
+                # velger det første av disse aktuelle rommene, og henter prisen til det rommet.
+                prices[ix] = assigned_rooms_type[0].price
+            except:
+                continue
+        # sender de tre pris-verdiene inn i context. PRØVDE å sende alle inn i en liste, men da klarer jeg ikke hente de
+        # ut på html-siden.
+        context = {'available_rooms': available_rooms, 'req_startdate': req_startdate, 'req_sluttdate': req_sluttdate,
+                   'req_cap': req_cap, 'price1': prices[0], 'price2': prices[1], 'price3': prices[2]}
+        return render(request, "../templates/se_rom.html", context)
 
 
 def booking(request):
@@ -66,8 +74,10 @@ def booking(request):
                        'req_sluttdate': req_sluttdate,
                        'req_room_type': req_room_type,
                        'req_cap': 1}
-
-            if allowed_room is not None:
+            if not check_legal_dates(req_startdate, req_sluttdate):
+                messages.warning(request, "Datovalget ditt er ikke gyldig.")
+                return render(request, "../templates/se_rom.html", context)
+            elif allowed_room is not None:
                 # Her oppretter jeg en ny booking med det lovlige rommet. !!! User finner man med request.user !!!
                 new_booking = Booking(guest=request.user, cin_date=req_startdate, cout_date=req_sluttdate,
                                       room_type=req_room_type, room=allowed_room)
@@ -127,16 +137,19 @@ def is_available(room, req_startdate, req_sluttdate):
     # Check if the dates are valid case 1: !!!! Denn sjekker dersom det finnes en rom-booking med sluttdato inni det
     # ønskede intervallet, men merk at det står gt siden count_date=req_startdate går fint!!!
     case_1 = Booking.objects.filter(room=room, cout_date__gt=req_startdate, cout_date__lte=req_sluttdate).exists()
-
     # case 2: !!!! Denn sjekker dersom det finnes en rom-booking med startdato inni det ønskede intervallet,
     # men merk at det står lt siden cin_date=req_sluttdate går fint!!!
     case_2 = Booking.objects.filter(room=room, cin_date__gte=req_startdate, cin_date__lt=req_sluttdate).exists()
-
     # case 3: !!! denne ser om det er en roombooking som omslutter den requestede!
     case_3 = Booking.objects.filter(room=room, cout_date__lte=req_startdate, cout_date__gte=req_sluttdate).exists()
-
     # om en av casene existerer er det en krasj i bookingen.
     if case_1 or case_2 or case_3:
         return False
     else:
         return True
+
+
+def check_legal_dates(startdate, sluttdate):
+    return datetime.strftime(datetime.today(), '%Y-%m-%d') <= startdate < sluttdate
+
+
