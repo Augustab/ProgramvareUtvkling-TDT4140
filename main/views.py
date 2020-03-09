@@ -4,6 +4,8 @@ from django.contrib import messages
 from .models import Room, Booking
 from .forms import DateForm, BookingForm, CancelForm
 from datetime import datetime, timedelta
+from django.core.mail import send_mail
+
 
 
 # denne må vi ha, den tegner selve forsiden.
@@ -82,6 +84,11 @@ def booking(request):
                 new_booking = Booking(guest=request.user, cin_date=req_startdate, cout_date=req_sluttdate,
                                       room_type=req_room_type, room=allowed_room)
                 new_booking.save()
+                send_mail('Order Confirmation',
+                          'This is an order confirmation',
+                          'skikkeligfancyhotell@gmail.com',
+                          [request.user.email],
+                          fail_silently=False)
 
                 return render(request, "../templates/se_rom.html", context)
             else:
