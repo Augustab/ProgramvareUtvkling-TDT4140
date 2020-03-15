@@ -8,7 +8,7 @@ class Room(models.Model):
     available = models.BooleanField(default=False)
     capacity = models.IntegerField(default=None)
     room_type = models.CharField(choices=room_choices, max_length=1, default=None)
-    price = models.IntegerField( blank=True, null=True)
+    price = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return "Romnr: " + str(self.room_no) + " -- type:" + str(self.room_type)
