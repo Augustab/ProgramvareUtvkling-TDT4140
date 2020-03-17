@@ -114,7 +114,7 @@ def booking(request):
                           'skikkeligfancyhotell@gmail.com',
                           [request.user.email],
                           fail_silently=False)
-
+                messages.warning(request, "Booking vellykket, se mail for bekreftelse.")
                 return render(request, "../templates/se_rom.html", context)
             else:
                 # om man ikke fant et rom kommer man hit, da lager jeg en message om at det ikke gikk. Logikken for å
