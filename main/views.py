@@ -3,8 +3,10 @@ from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.contrib import messages
 from .models import Room, Booking
 from .forms import DateForm, BookingForm, CancelForm
+from signup.forms import RegisterForm
 from datetime import datetime, timedelta
 from django.core.mail import send_mail
+import signup.views as v
 
 
 
@@ -12,7 +14,25 @@ from django.core.mail import send_mail
 
 # denne må vi ha, den tegner selve forsiden.
 def home(response):
-    return render(response, "../templates/forside.html")
+    context = {'er_vaskehjelp': response.user.groups.filter(name='vaskehjelp').exists()}
+    return render(response, "../templates/forside.html", context)
+
+
+def vaskehjelp(response):
+    available_rooms = Room.objects.filter(available=True)
+    context = {}
+    room_nums = []
+    for room in available_rooms:
+        related_bookings = Booking.objects.filter(room=room)
+        if related_bookings:
+            room_nums.append(room.room_no)
+            room.related_bookings = related_bookings
+
+    context["room_nums"] = room_nums
+    context["available_rooms"] = available_rooms
+    print(context)
+    return render(response, "../templates/se_vaskbare_rom.html", context)
+
 
 # denne må vi ha, den tegner se_rom.
 def se_rom(request):
@@ -77,7 +97,8 @@ def booking(request):
             context = {'available_rooms': available_rooms, 'req_startdate': req_startdate,
                        'req_sluttdate': req_sluttdate,
                        'req_room_type': req_room_type,
-                       'req_cap': 1}
+                       'req_cap': 1, 'user': request.user}
+
             if not check_legal_dates(req_startdate, req_sluttdate):
                 messages.warning(request, "Datovalget ditt er ikke gyldig.")
                 return render(request, "../templates/se_rom.html", context)

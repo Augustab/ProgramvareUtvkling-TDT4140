@@ -1,12 +1,12 @@
-{%  extends "base.html" %}
-{% load static %}
+{% extends "base.html" %}
+{% load static%}
 
 
 {% block title %}
-Skikkelig Fancy Hotell
+    Skikkelig Fancy Hotell
 {% endblock %}
 
-<!-- NEDENFOR HAR JEG faktisk lagt til css-en til forside enda en gang. EN av variantene kan godt fjernes, men da ser man de to måtene det går an å gjøre det på. -->
+<!--NEDENFORHARJEGfaktisklagttilcss-entilforsideendaengang.ENavvariantenekangodtfjernes,mendasermandetomåtenedetgåranågjøredetpå.-->
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static "css/forside.css" %}">
 {% endblock %}
@@ -14,49 +14,52 @@ Skikkelig Fancy Hotell
 {% load crispy_forms_tags %}
 
 
-{% block content%}
+{% block content %}
     <div id="rad">
-        <div class = "row" >
-            <div class = "col-sm-4" id="col-venstre">
-                 <div class="text-center">
-                         <a class="navbar-brand" href="#" >
-                         <img src="/static/images/Hotell_logo2.png" width="201.3" height="85.8" alt="" >
-                         </a>
-                  </div>
+        <div class="row">
+            <div class="col-sm-4" id="col-venstre">
+                <div class="text-center">
+                    <a class="navbar-brand" href="#">
+                        <img src="/static/images/Hotell_logo2.png" width="201.3" height="85.8" alt="">
+                    </a>
+                </div>
             </div>
-            <div class = "col-sm-2"></div>
-            <div class="col-sm-2">
-            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2"></div>
 
-            <div  class = "col-sm-2">
-                {%if not user.is_authenticated %}
+            <div class="col-sm-2">
+                {%if not user.is_authenticated%}
                     <div class="text-center">
-                        <a href="/signup"><button type="button" class="btn btn-outline-dark" id="logg-inn" >Lag bruker</button></a>
+                        <a href="/signup"><button type="button" class="btn btn-outline-dark" id="logg-inn">Lag bruker</button></a>
                     </div>
-                {% elif user.is_superuser %}
+                {%elif er_vaskehjelp%}
                     <div class="text-center">
-                    <a href="/admin"><button type="button" class="btn btn-outline-dark" id="logg-inn">Gå til admin</button></a>
+                        <a href="/vaskehjelp"><button type="button" class="btn btn-outline-dark" id="logg-inn">Rom-oversikt</button></a>
                     </div>
-                {% elif user.is_authenticated %}
+                {%elif user.is_superuser%}
+                     <div class="text-center">
+                        <a href="/admin"><button type="button" class="btn btn-outline-dark" id="logg-inn">Gå til admin</button></a>
+                     </div>
+                {%elif user.is_authenticated%}
                     <div class="text-center">
-                    <a href="/se_bestillinger"><button type="button" class="btn btn-outline-dark" id="logg-inn">Se bestillinger</button></a>
+                        <a href="/se_bestillinger"><button type="button" class="btn btn-outline-dark" id="logg-inn">Se bestillinger</button></a>
                     </div>
-                {% endif %}
+                {%endif%}
             </div>
 
 
 
 
             {%if user.is_authenticated%}
-                <div class = "col-sm-2" >
+                <div class="col-sm-2">
                     <div class="text-center">
-                        <a href="/logout"><button type="button" class="btn btn-outline-dark" id="logg-inn" >Logg ut</button></a>
+                        <a href="/logout"><button type="button" class="btn btn-outline-dark" id="logg-inn">Logg ut</button></a>
                     </div>
                 </div>
             {%else%}
-                <div class = "col-sm-2" >
+                <div class="col-sm-2">
                     <div class="text-center">
-                        <a href="/login"><button type="button" class="btn btn-outline-dark" id="logg-inn" >Logg inn</button></a>
+                        <a href="/login"><button type="button" class="btn btn-outline-dark" id="logg-inn">Logg inn</button></a>
                     </div>
                 </div>
             {%endif%}
@@ -64,32 +67,30 @@ Skikkelig Fancy Hotell
     </div>
 
     <div id="rad2">
-        <div class="row">
-            <div class="col-sm-1" ></div>
-                <div class="col-sm-10" id="whitebox" >
-                    <form method="POST" name="DateForm" action="{% url 'se_rom' %}">
-                        {% csrf_token %}
-                        <h5>Her velger du dato for oppholdet:</h5>
-                        <input type="date" class="form-control"  id="datePicker"   placeholder="Startdato" name="req_startdate">
-                        <h5>Til:</h5>
-                        <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
-                        <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
-                        <input type="date" class="form-control"  placeholder="Sluttdato" id="datePicker2" name="req_sluttdate">
-                        <input type="number" value="1" class="form-control" placeholder="Antall" name="req_cap" >
-                        <button type="submit" name="Se_tigjengelige_rom" class="btn btn-dark" >Se tilgjengelige rom</button>
-                    </form>
-                </div>
-            <div class="col-sm-1"></div>
-        </div>
+    <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10" id="whitebox">
+    <form method="POST" name="DateForm" action="{%url 'se_rom' %}">
+    {%csrf_token%}
+    <h5>Her velger du dato for oppholdet:</h5>
+    <input type="date" class="form-control" id="datePicker" placeholder="Startdato" name="req_startdate">
+    <h5>Til:</h5>
+    <!--################hermåttejegleggeendivrundtinputenforåklareåoverkjørebootstrap-stylenogfålittmarginmellomknappoginput.FJERNETALTSÅDENNEDIV'N-->
+    <!--##OOOBSfantutatduhvisduleggerlinkentildittegetstilarkøverst,skaldetordneseg.-->
+    <input type="date" class="form-control" placeholder="Sluttdato" id="datePicker2" name="req_sluttdate">
+    <input type="number" value="1" class="form-control" placeholder="Antall" name="req_cap">
+    <button type ="submit" name=" Se_tigjengelige_rom" class="btn btn-dark">Se tilgjengelige    rom</button>
+    </form>
     </div>
-    <!-- funksjonalitet for å sette datoverdiene i input-feltene-->
+    <div class="col-sm-1"></div>
+    </div>
+    </div>
+    <!--funksjonalitetforåsettedatoverdieneiinput-feltene-->
     <script>
-        const today = new Date()
-        const tomorrow = new Date(today)
-        tomorrow.setDate(tomorrow.getDate() + 1)
+        const today=new Date();
+        const tomorrow=new Date(today);
+        tomorrow.setDate(tomorrow.getDate()+1);
         document.getElementById('datePicker').valueAsDate = today;
         document.getElementById('datePicker2').valueAsDate = tomorrow;
     </script>
-{% endblock %}
-
-
+{%endblock%}
