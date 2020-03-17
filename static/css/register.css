@@ -1,0 +1,14 @@
+body {
+  background: url('../images/thenight.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  overflow-x: hidden;
+}
+
+.col-sm-10{
+    background-color: rgba(255,255,255, 0.7);
+    border-radius: 20px;
+    margin-top: 1%;
+}

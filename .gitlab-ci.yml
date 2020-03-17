@@ -1,0 +1,16 @@
+image: python:3.8
+
+stages:
+  - test
+
+before_script:
+  - python --version
+  - pip install -r requirements.txt
+
+
+test:
+  stage: test
+  allow_failure: true
+  script:
+    - python manage.py test
+

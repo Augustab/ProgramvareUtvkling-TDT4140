@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Create an Account{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="../static/css/register.css">
+{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class = "row" >
+        <div class = "col-sm-4"></div>
+        <div class = "col-sm-4" id="col-venstre">
+             <div class="text-center">
+                     <a class="navbar-brand" href="{% url 'home' %}" >
+                     <img src="/static/images/Hotell_logo2.png" width="201.3" height="85.8" alt="" >
+                     </a>
+              </div>
+        </div>
+        <div class = "col-sm-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+        <form method="POST" class="form-group">
+        {% csrf_token %}
+        <!-- Har ikke fått crispy til å fungere enda, men fokuserer ikke på det i denne sprinten. Crispy gjør det bare finere estetisk. -->
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-dark">Register</button>
+        </form>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+{% endblock %}

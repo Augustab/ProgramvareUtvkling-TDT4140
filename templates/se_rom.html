@@ -1,0 +1,230 @@
+{%  extends "base_mNavnbar.html" %}
+{% load static %}
+
+{% block title %}
+Skikkelig Fancy Hotell
+{% endblock %}
+
+<!--SE I BUNN for message-funksjonaliteten-->
+{% block style %}
+    <link rel="stylesheet" href="../static/css/se_rom.css">
+{% endblock %}
+
+{% block content%}
+    <div class="row" style="margin-top: 2%">
+        <div class="col-sm-1"></div>
+        {% if req_startdate != 0 and req_sluttdate != 0 and req_cap != 0  %}
+            <div class="col-sm-10 text-center"><h4>Viser tilgjengelige rom for innsjekk: {{ req_startdate }}, utsjekk : {{ req_sluttdate }} og antall: {{ req_cap }}</h4></div>
+        {% else%}
+            <div class="col-sm-10 text-center"></div>
+        {% endif %}
+        <div class="col-sm-1"></div>
+
+    </div>
+
+
+    <div class="row">
+        {% if req_cap <= 1%}
+        <div class="col-sm-3 card bg-light">
+        {% else %}
+        <div class="col-sm-3 card " >
+        {% endif %}
+            <img class="card-img-top" src="../static/images/standard_singel.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Standard Singel</h5>
+                <p class="card-text" style="text-align: left">
+                Et lite rom for dem som vil oppleve Trondehim alene.
+                    <li style="margin-left: 12px">13 - 16 m²</li>
+                    <li style="margin-left: 12px">1 sengeplass</li>
+
+
+                </p>
+                <div class="row">
+                    {% if req_cap <= 1%}
+                    <a type="button" style="margin-top: 26px;margin-left: 10px" href="#" class="btn btn-outline-secondary">Tilgjengelig</a>
+                    {% endif %}
+                    <p style="margin-left: 40px; margin-top: 26px; color: #5a6268;"> {{ price1 }} <small> NOK/natt</small></p>
+                </div>
+            </div>
+        </div>
+        {% if req_cap <= 2 %}
+        <div class="col-sm-3 card bg-light">
+        {% else %}
+        <div class="col-sm-3 card " >
+        {% endif %}
+            <img class="card-img-top" src="../static/images/dobbelrom.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Dobbelrom</h5>
+                <p class="card-text" style="text-align: left">Et dobbelt så stort rom for folk som trenger dobbelt så mye plass.
+                    <li style="margin-left: 12px">19 - 22 m²</li>
+                    <li style="margin-left: 12px">TV og betalt internett</li>
+                    <li style="margin-left: 12px">2 sengeplasser</li>
+                </p>
+                <div class="row">
+                    {% if req_cap <= 2%}
+                    <a type="button" href="#" style="margin-left: 10px" class="btn btn-outline-secondary">Tilgjengelig</a>
+                    {% endif %}
+                    <p style="margin-left: 40px; color: #5a6268;"> {{ price2 }} <small> NOK/natt</small></p>
+                </div>
+            </div>
+        </div>
+        {% if req_cap <= 4 %}
+        <div class="col-sm-3 card bg-light">
+        {% else %}
+        <div class="col-sm-3 card " >
+        {% endif %}
+            <img class="card-img-top" src="../static/images/superior.jpg" alt="Card image cap" style="height:70%">
+            <div class="card-body">
+                <h5 class="card-title">Firemannsrom</h5>
+                <p class="card-text"style="text-align: left; margin-bottom: 27px">Firemannsrom for kjernefamilien. Her har man plass til å boltre seg.
+                    <li style="margin-left: 12px">22 - 30 m²</li>
+                    <li style="margin-left: 12px">TV og inkludert internett</li>
+                    <li style="margin-left: 12px">4 sengeplasser</li>
+                </p>
+                <div class="row">
+                    {% if req_cap <= 4%}
+                    <a type="button" href="#" style="margin-left: 10px" class="btn btn-outline-secondary">Tilgjengelig</a>
+                    {% endif %}
+                    <p style="margin-left: 40px;color: #5a6268;"> {{ price3 }} <small> NOK/natt</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<div class="row" style="margin-top: 2%">
+    {% if user.is_superuser %}
+        <div class="col-sm-6" id="whitebox" >
+
+            <form method="POST" name="DateForm" action="{% url 'se_rom' %}">
+                {% csrf_token %}
+                <h4>Her kan du endre søket ditt:</h4>
+                <input type="date" class="form-control"  name="req_startdate" value="{{ req_startdate }}">
+                <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
+                <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
+                <input type="date" class="form-control"   name="req_sluttdate" value="{{ req_sluttdate }}"  >
+                <input type="number" class="form-control"  placeholder="Antall sengeplasser" name="req_cap" value="{{ req_cap }}">
+                <button type="submit" name="Se_tigjengelige_rom" class="btn btn-dark" >Se tilgjengelige rom</button>
+            </form>
+            <div id="plasseribunn">
+                <h4 style="margin-top: 1%">Her kan du bestille ett av rommene:</h4>
+                <form method="POST" name="BookingForm" action="{% url 'booking' %}">
+                    {% csrf_token %}
+                    <input type="date" class="form-control" name="req_startdate" value="{{ req_startdate }}">
+
+                    <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
+                    <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
+                    <input type="date" class="form-control"  name="req_sluttdate" value="{{ req_sluttdate }}">
+                    <input type="text" class="form-control"  placeholder="S/D/F (singel/dobbel/firemanns)" name="req_room_type" >
+
+
+                    <button type="submit" name="bestill" class="btn btn-dark"  >Bestill</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="col-sm-6">
+            <h4>Tilgjengelige rom</h4>
+            <table class="table table-striped table-dark">
+            <tr class="thead-dark">
+                <th scope="col">Room No.</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Room Type</th>
+            </tr>
+            {% for item in available_rooms %}
+                <tr scope="row">
+                <td>{{ item.room_no }}</td>
+                <td>{{ item.capacity }}</td>
+                <td>{{ item.room_type }}</td>
+            </tr>
+            {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" id="whitebox">
+            <form method="POST" name="DateForm" action="{% url 'se_rom' %}">
+                {% csrf_token %}
+                <h4>Her kan du endre søket ditt:</h4>
+                <input type="date" class="form-control"  name="req_startdate" value="{{ req_startdate }}">
+                <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
+                <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
+                <input type="date" class="form-control"   name="req_sluttdate" value="{{ req_sluttdate }}"  >
+                <input type="number" class="form-control"  placeholder="Antall sengeplasser" name="req_cap" value="{{ req_cap }}">
+                <button type="submit" name="Se_tigjengelige_rom" class="btn btn-dark" >Se tilgjengelige rom</button>
+            </form>
+            <div id="plasseribunn">
+                {% if not user.is_authenticated %}
+                    <h4>Du må registrere deg for å kunne bestille rom:</h4>
+                    <a href="/signup"><button type="submit" name="bestill" class="btn btn-dark">Lag bruker</button></a>
+                    <br>
+                    <br>
+                {% else %}
+                    <h4 style="margin-top: 1%">Her kan du bestille ett av rommene:</h4>
+                    <form method="POST" name="BookingForm" action="{% url 'booking' %}">
+                        {% csrf_token %}
+                        <input type="date" class="form-control" name="req_startdate" value="{{ req_startdate }}">
+
+                        <!--################ her måtte jeg legge en div rundt inputen for å klare å overkjøre bootstrap-stylen og få litt margin mellom knapp og input. FJERNET ALTSÅ DENNE DIV'N-->
+                        <!--## OOOBS fant ut at du hvis du legger linken til ditt eget stilark øverst, skal det ordne seg. -->
+                        <input type="date" class="form-control"  name="req_sluttdate" value="{{ req_sluttdate }}">
+                        <input type="text" class="form-control"  placeholder="S/D/F (singel/dobbel/firemanns)" name="req_room_type" >
+                        <button type="submit" name="bestill" class="btn btn-dark" >Bestill</button>
+                        <div class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Dropdown link
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" >Action</a>
+                                <a class="dropdown-item" >Another action</a>
+                                <a class="dropdown-item" >Something else here</a>
+                             </div>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    {% endif %}
+
+</div>
+
+    <!--DET EE denne koden som sørger for at messages blir displayed om de finnes!!! -->
+
+    {% if messages %}
+   <script>
+    {% for message in messages %}
+        alert("{{ message }}");
+    {% endfor %}
+   </script>
+    {% endif %}
+
+
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the drodown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+{% endblock %}
+
+
