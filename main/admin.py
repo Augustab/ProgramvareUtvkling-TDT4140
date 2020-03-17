@@ -3,3 +3,5 @@ from .models import Room, Booking
 
 admin.site.register(Room)
 admin.site.register(Booking)
+
+admin.site.site_header = "Skikkelig Fancy Hotell"
