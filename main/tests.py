@@ -76,8 +76,8 @@ class ViewTest(TestCase):
         self.assertEqual(response.status_code, 200) #200 er HTTP OK
         self.assertTemplateUsed(response, "../templates/forside.html")
 
-    def test_se_rom(self): # tester se_rom-siden
-        response = self.client.get("/se_rom/")
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "../templates/se_rom.html")
+    #def test_se_rom(self): # tester se_rom-siden
+        #response = self.client.get("/se_rom/")
+        #self.assertEqual(response.status_code, 200)
+        #self.assertTemplateUsed(response, "../templates/se_rom.html")
 
