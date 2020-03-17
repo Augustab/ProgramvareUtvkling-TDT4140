@@ -12,6 +12,10 @@ body {
   padding: 2%;
   background-color: rgba(0,0,0, 0.3) !important;
 }
+#lagbruker{
+  position: relative;
+  margin: 5%;
+}
 h2{
     text-align: center;
 }
