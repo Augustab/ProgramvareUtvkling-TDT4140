@@ -107,7 +107,7 @@ def booking(request):
                 new_booking = Booking(guest=request.user, cin_date=req_startdate, cout_date=req_sluttdate,
                                       room_type=req_room_type, room=allowed_room)
                 new_booking.save()
-                respons = "Thank you for booking with us at Skikkelig Fancy Hotell! Here are the reservation details:\nArrival:" + req_startdate + "\nCheckout:" + req_sluttdate + "\nBooking ID: 52768 – Room 3\n \nPlease make sure this information is correct. If not, please contact us as soon as possible to make necessary corrections at: \nEmail: skikkeligfancyhotell@gmail.com \nPhone: +11 1 1111 1000 \n\nWe look forward to welcoming you to Skikkelig Fancy Hotell. Check-in is after 4:00 PM; check-out time is 12:00 AM. \n\nBest regards, \nThe staff at Skikkelig Fancy Hotell"
+                respons = "Thank you for booking with us at Skikkelig Fancy Hotell! Here are the reservation details:\nArrival:" + req_startdate + "\nCheckout:" + req_sluttdate + "\nBooking ID: 52768 – Room 3\n \nPlease make sure this information is correct. If not, please contact us as soon as possible to make necessary corrections at: \nEmail: skikkeligfancyhotell@gmail.com \nPhone: +11 1 1111 1000 \n\nWe look forward to welcoming you to Skikkelig Fancy Hotell. Check-in is after 4:00 PM; check-out time is 12:00 AM. \n\nBest regards, \nThe staff at Skikkelig Fancy Hotell!"
 
                 send_mail('Order Confirmation',
                           respons,
