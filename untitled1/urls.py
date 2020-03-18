@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 import signup.views as v
 import main.views as v2
 
@@ -30,3 +31,4 @@ urlpatterns = [
     path('', v2.redirect, name="homeredirectfraingenting"),
     path('', include("django.contrib.auth.urls")),
 ]
+urlpatterns += staticfiles_urlpatterns()
