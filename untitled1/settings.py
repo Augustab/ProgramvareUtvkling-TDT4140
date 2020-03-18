@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['skikkeligfancyhotell.herokuapp.com', ]
 
 # Et tillegg til forandring av admin-siden som ikke fungerte da jeg prøvde, men som kan ligge her dersom noen vil prøve
 SUIT_CONFIG = {
