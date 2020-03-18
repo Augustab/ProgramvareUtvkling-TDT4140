@@ -158,7 +158,7 @@ USE_TZ = TrueSTATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticF
 ##os.path.dirname(os.path.abspath(__file__))
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 ######## kodelinjene under (staticfiles..) gjør at django klarer å finne static-mappen vår. OM vi ikke har med den vil den ikke finne staticfilene.
