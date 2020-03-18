@@ -13,14 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import patterns as patterns
-from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 import signup.views as v
 import main.views as v2
-import untitled1.settings as s
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,8 +31,4 @@ urlpatterns = [
     path('', v2.redirect, name="homeredirectfraingenting"),
     path('', include("django.contrib.auth.urls")),
 ]
-urlpatterns += patterns('',
-    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
-        'document_root': s.STATIC_ROOT,
-    }),
- )
+urlpatterns += staticfiles_urlpatterns()
