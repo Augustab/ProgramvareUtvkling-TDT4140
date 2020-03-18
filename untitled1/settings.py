@@ -115,7 +115,7 @@ WSGI_APPLICATION = 'untitled1.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL'))
+    'default': dj_database_url.config(default='postgres://ltdtlfdsxkrlkb:1c7792d273f3ae06fbe3beec7b6c28eb8b2112ccc08879e2528c5c08e663a98b@ec2-52-87-58-157.compute-1.amazonaws.com:5432/dehh7qgpen8uce')
 }
 
 
@@ -155,7 +155,8 @@ USE_TZ = TrueSTATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticF
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.dirname(os.path.abspath(__file__))
+##os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
