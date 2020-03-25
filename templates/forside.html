@@ -25,7 +25,17 @@
                 </div>
             </div>
             <div class="col-sm-2"></div>
-            <div class="col-sm-2"></div>
+            <div class="col-sm-2">
+                {%if user.is_superuser%}
+                    <div class="text-center">
+                        <a href="/statistikk"><button type="button" class="btn btn-outline-dark" id="logg-inn">Se statistikk</button></a>
+                    </div>
+                {%elif er_investor%}
+                    <div class="text-center">
+                        <a href="/statistikk"><button type="button" class="btn btn-outline-dark" id="logg-inn">Se statistikk</button></a>
+                    </div>
+                {%endif%}
+            </div>
 
             <div class="col-sm-2">
                 {%if not user.is_authenticated%}
