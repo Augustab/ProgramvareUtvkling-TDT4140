@@ -1,22 +1,20 @@
-import signup.views as v
-from django.core.mail import send_mail
-from datetime import datetime, timedelta
-from signup.forms import RegisterForm
-from .forms import DateForm, BookingForm, CancelForm
-from .models import Room, Booking
-from django.contrib import messages
-from django.http import HttpResponse, HttpResponsePermanentRedirect
-from django.shortcuts import render, reverse
-import matplotlib.pyplot as plt2
-import matplotlib.pyplot as plt
+'''Filen som tegner alle html-sidene.'''
 import base64
 import io
 import urllib
-import numpy as np
+from datetime import datetime
 import matplotlib
+import matplotlib.pyplot as plt
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.http import HttpResponsePermanentRedirect
+from django.shortcuts import render, reverse
+from .forms import DateForm, BookingForm, CancelForm
+from .models import Room, Booking
 matplotlib.use('Agg')
+# use Agg var noe som skulle hjelpe for å plotte grafene.
 
-month_dic = [
+MONTH_DIC = [
     "Jan",
     "Feb",
     "Mar",
@@ -43,128 +41,27 @@ def home(response):
     return render(response, "../templates/forside.html", context)
 
 
-'''
-def get_omsetning_plot():
-    omsetning = get_omsetning()
-
-    objects = ['Omsetning']
-    y_pos = np.arange(len(objects))
-    performance = [omsetning]
-
-    plt.bar(y_pos, performance, align='center', alpha=0.5)
-    plt.xticks(y_pos, objects)
-    plt.ylabel('NOK')
-    plt.title('Total Omsetning (planlagt)')
-
-    fig = plt.gcf()
-    buf = io.BytesIO()
-    fig.savefig(buf, format='png')
-    buf.seek(0)
-    string = base64.b64encode(buf.read())
-    uri = urllib.parse.quote(string)
-    return uri
-
-def get_months_plot():
-    plt2.ylabel('Antall')
-    plt2.title('Antall bookinger i kommende måneder')
-    plt2.plot([1, 2, 3, 4], [1, 4, 9, 16])
-
-    fig2 = plt2.gcf()
-    buf2 = io.BytesIO()
-    fig2.savefig(buf2, format='png')
-    buf2.seek(0)
-    string2 = base64.b64encode(buf2.read())
-    uri2 = urllib.parse.quote(string2)
-    return uri2
-'''
-
-
 def months_list():
+    '''Funksjonen som brukes for å danne x-aksen på grafen (med måneder)'''
     dates = [datetime.today()]
     for i in range(11):
-        x = dates[len(dates) - 1]
+        i_x = dates[len(dates) - 1]
         try:
-            nextmonthdate = x.replace(month=x.month + 1)
+            nextmonthdate = i_x.replace(month=i_x.month + 1)
         except ValueError:
-            if x.month == 12:
-                nextmonthdate = x.replace(year=x.year + 1, month=1)
+            if i_x.month == 12:
+                nextmonthdate = i_x.replace(year=i_x.year + 1, month=1)
             else:
-                nextmonthdate = x.replace(month=x.month + 1, day=x.day - 10)
+                nextmonthdate = i_x.replace(month=i_x.month + 1, day=i_x.day - 10)
         dates.append(nextmonthdate)
     string_dates = []
-    for i in range(0, len(dates)):
-        string_dates.append(month_dic[dates[i].month - 1])
+    for date in dates:
+        string_dates.append(MONTH_DIC[date.month - 1])
     return string_dates
 
 
-def get_bookings_per_month():
-    dates = [datetime.today()]
-    for i in range(11):
-        x = dates[len(dates) - 1]
-        try:
-            nextmonthdate = x.replace(month=x.month + 1)
-        except ValueError:
-            if x.month == 12:
-                nextmonthdate = x.replace(year=x.year + 1, month=1)
-            else:
-                nextmonthdate = x.replace(month=x.month + 1, day=x.day - 10)
-        dates.append(nextmonthdate)
-    bookings = Booking.objects.all()
-    count_bookings = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    for booking in bookings:
-        count_bookings[booking.cin_date.month - 1] += 1
-    result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    for i in range(len(dates) - 1):
-        result[i] = count_bookings[dates[i].month - 1]
-    return result
-
-
 def statistikk(request):
-    '''
-    x1 = np.linspace(0.0, 5.0)
-    x2 = np.linspace(0.0, 2.0)
-
-    y1 = np.cos(2 * np.pi * x1) * np.exp(-x1)
-    y2 = np.cos(2 * np.pi * x2)
-
-    plt.subplot(2, 1, 1)
-    plt.plot(x1, y1, 'o-')
-    plt.title('Statistikk for skikkelig fancy hotell')
-    plt.ylabel('Damped oscillation')
-
-    plt.subplot(2, 1, 2)
-    plt.plot(x2, y2, '.-')
-    plt.xlabel('time (s)')
-    plt.ylabel('Undamped')
-
-    fig = plt.gcf()
-    buf = io.BytesIO()
-    fig.savefig(buf, format='png')
-    buf.seek(0)
-    string = base64.b64encode(buf.read())
-    uri = urllib.parse.quote(string)
-    '''
-
-    omsetning = get_omsetning()
-
-    objects = ['Omsetning']
-    plt.figure(1)
-    y_pos = np.arange(len(objects))
-    performance = [omsetning]
-
-    plt.bar(y_pos, performance, align='center', alpha=0.5)
-    plt.xticks(y_pos, objects)
-    plt.ylabel('NOK')
-    plt.title('Total Omsetning (planlagt)')
-
-    fig = plt.gcf()
-    buf = io.BytesIO()
-    fig.savefig(buf, format='png')
-    buf.seek(0)
-    string = base64.b64encode(buf.read())
-    uri = urllib.parse.quote(string)
-
-    # figure 2 under!
+    '''Funksjonen somm rendrer statistikksiden.'''
     plt.figure(2)
     plt.ylabel('Antall')
     plt.title('Antall bookinger i kommende måneder')
@@ -176,12 +73,12 @@ def statistikk(request):
     buf2.seek(0)
     string2 = base64.b64encode(buf2.read())
     uri2 = urllib.parse.quote(string2)
-
     return render(request, "../templates/statistikk.html",
-                  {'data1': uri, 'data2': uri2})
+                  {'data2': uri2, 'omsetning': get_omsetning()})
 
 
 def vaskehjelp(response):
+    '''Funksjonen som rendrer vaskehjelp-siden'''
     available_rooms = Room.objects.filter(available=True)
     context = {}
     room_nums = []
@@ -197,8 +94,8 @@ def vaskehjelp(response):
     return render(response, "../templates/se_vaskbare_rom.html", context)
 
 
-# denne må vi ha, den tegner se_rom.
 def se_rom(request):
+    '''Funksjonen som rendrer se rom siden'''
     req_startdate = 0
     req_sluttdate = 0
     req_cap = 0
@@ -221,18 +118,19 @@ def se_rom(request):
     else:
         available_rooms = Room.objects.filter(available=True)
         # Her går jeg gjennom de x antall romtypene, og setter prisen deres.
-        for ix in range(len(room_chars)):
+        for i_x in range(len(room_chars)):
             # henter ut de aktuelle rommene av denne typen
             assigned_rooms_type = list(
                 Room.objects.filter(
-                    room_type=room_chars[ix]))
+                    room_type=room_chars[i_x]))
             try:
                 # velger det første av disse aktuelle rommene, og henter prisen
                 # til det rommet.
-                prices[ix] = assigned_rooms_type[0].price
+                prices[i_x] = assigned_rooms_type[0].price
             except BaseException:
                 continue
-        # sender de tre pris-verdiene inn i context. PRØVDE å sende alle inn i en liste, men da klarer jeg ikke hente de
+        # sender de tre pris-verdiene inn i context. PRØVDE å sende
+        # alle inn i en liste, men da klarer jeg ikke hente de
         # ut på html-siden.
         context = {
             'available_rooms': available_rooms,
@@ -246,6 +144,7 @@ def se_rom(request):
 
 
 def booking(request):
+    '''Funksjonen som oppretter en booking.'''
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
@@ -269,7 +168,6 @@ def booking(request):
                         break
             except BaseException:
                 pass
-
             context = {
                 'available_rooms': available_rooms,
                 'req_startdate': req_startdate,
@@ -277,7 +175,6 @@ def booking(request):
                 'req_room_type': req_room_type,
                 'req_cap': 1,
                 'user': request.user}
-
             if not check_legal_dates(req_startdate, req_sluttdate):
                 messages.warning(request, "Datovalget ditt er ikke gyldig.")
                 return render(request, "../templates/se_rom.html", context)
@@ -301,32 +198,34 @@ def booking(request):
                 messages.warning(request, "Booking vellykket.")
                 return render(request, "../templates/se_rom.html", context)
             else:
-                # om man ikke fant et rom kommer man hit, da lager jeg en message om at det ikke gikk. Logikken for å
+                # om man ikke fant et rom kommer man hit,
+                # da lager jeg en message om at det ikke gikk. Logikken for å
                 # displaye messagen ligger i se_rom.html
                 messages.warning(
                     request, "Det finnes ingen tilgjengelige rom i dette tilfellet.")
                 return render(request, "../templates/se_rom.html", context)
 
 
-# Denne funksjonen sørger for at dersom du ikke har skrevet noe i url-en (dvs = "http://127.0.0.1:8000/") så skal du
-# redirectes til http://127.0.0.1:8000/home/ dette fordi vi vil at brukerene skal være på hjem siden når man starter
-# programmet.
 def redirect(request):
+    '''Redirecter deg til hjemmesiden dersom ikke noe er angitt i url'en'''
     return HttpResponsePermanentRedirect(reverse('home'))
 
 
 def se_booking(request):
+    '''Denne funksjonen rendrer se bestillinger-siden. '''
     # dette er viewen som sender deg til siden som viser dine bestillinger.
     # Først henter jeg ut brukeren.
     user = request.user
-    # henter relaterte bookinger til brukeren
-    related_bookings = Booking.objects.filter(guest=user)
     # sender denne informasjonen inn som context
-    context = {'related_bookings': related_bookings, 'user': user.username}
+    context = {
+        'related_bookings': Booking.objects.filter(
+            guest=user),
+        'user': user.username}
     return render(request, "../templates/se_bestillinger.html", context)
 
 
 def slett_booking(request):
+    '''Denne funksjonen sletter den valgte bookingen'''
     # som dere ser i se_bestillinger.html har vi en form som sender deg hit
     # ved buttontrykk.
     if request.method == "POST":
@@ -360,14 +259,18 @@ def slett_booking(request):
 
 # funknjonen som ser etter overlappende bookinger.
 def is_available(room, req_startdate, req_sluttdate):
-    # Check if the dates are valid case 1: !!!! Denn sjekker dersom det finnes en rom-booking med sluttdato inni det
+    '''Dette er funksjonen som ser omnoen av de eksisterende
+     bookingene på input-rommet krasjer med de foreslåttedatoene.'''
+    # Check if the dates are valid case 1:
+    #Denn sjekker dersom det finnes en rom-booking med sluttdato inni det
     # ønskede intervallet, men merk at det står gt siden
     # count_date=req_startdate går fint!!!
     case_1 = Booking.objects.filter(
         room=room,
         cout_date__gt=req_startdate,
         cout_date__lte=req_sluttdate).exists()
-    # case 2: !!!! Denn sjekker dersom det finnes en rom-booking med startdato inni det ønskede intervallet,
+    # case 2: !!!! Denn sjekker dersom det finnes
+    # en rom-booking med startdato inni det ønskede intervallet,
     # men merk at det står lt siden cin_date=req_sluttdate går fint!!!
     case_2 = Booking.objects.filter(
         room=room,
@@ -387,15 +290,43 @@ def is_available(room, req_startdate, req_sluttdate):
 
 
 def check_legal_dates(startdate, sluttdate):
+    '''Sjekker om to datoer er gyldige (eks ikke slutt før start)'''
     return datetime.strftime(
         datetime.today(),
         '%Y-%m-%d') <= startdate < sluttdate
 
 
 def get_omsetning():
+    '''kalkulerer total omsetning for alle bookinger ved
+    å gange pris.pr.natt med antall netter'''
     bookings = Booking.objects.all()
     omsetning = 0
     for booking in bookings:
         daydif = booking.cout_date - booking.cin_date
         omsetning += daydif.days * int(booking.room.price)
     return omsetning
+
+
+def get_bookings_per_month():
+    '''Funksjon som returnerer en liste med antall bookinger i kommende
+    månedder, der posisjonen i listen er gitt av hvilken måned vi er i nå
+    og dermed er første indeks = måneden vi er i nå.'''
+    dates = [datetime.today()]
+    for i in range(11):
+        i_x = dates[len(dates) - 1]
+        try:
+            nextmonthdate = i_x.replace(month=i_x.month + 1)
+        except ValueError:
+            if i_x.month == 12:
+                nextmonthdate = i_x.replace(year=i_x.year + 1, month=1)
+            else:
+                nextmonthdate = i_x.replace(month=i_x.month + 1, day=i_x.day - 10)
+        dates.append(nextmonthdate)
+    bookings = Booking.objects.all()
+    count_bookings = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for booking in bookings:
+        count_bookings[booking.cin_date.month - 1] += 1
+    result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for i in range(len(dates) - 1):
+        result[i] = count_bookings[dates[i].month - 1]
+    return result

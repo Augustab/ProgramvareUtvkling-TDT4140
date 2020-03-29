@@ -6,13 +6,11 @@ body {
   -o-background-size: cover;
   overflow-x: hidden;
 }
-
 .col-sm-10, .col-sm-8{
     background-color: rgba(255,255,255, 0.7);
     border-radius: 20px;
     margin-top: 1%;
 }
-
 #graph{
     position: relative;
     margin-top: 5%;
@@ -21,7 +19,4 @@ body {
     background-color: rgba(255,255,255, 0.7);
     border-radius: 20px;
     margin-top: 1%;
-}
-#graphimg{
-
 }

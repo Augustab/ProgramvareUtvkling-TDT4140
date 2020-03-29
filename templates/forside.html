@@ -2,18 +2,13 @@
 {% load static%}
 
 
-{% block title %}
-    Skikkelig Fancy Hotell
-{% endblock %}
-
+{% block title %}Skikkelig Fancy Hotell{% endblock %}
 <!--NEDENFORHARJEGfaktisklagttilcss-entilforsideendaengang.ENavvariantenekangodtfjernes,mendasermandetomåtenedetgåranågjøredetpå.-->
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static "css/forside.css" %}">
 {% endblock %}
 
 {% load crispy_forms_tags %}
-
-
 {% block content %}
     <div id="rad">
         <div class="row">
@@ -36,7 +31,6 @@
                     </div>
                 {%endif%}
             </div>
-
             <div class="col-sm-2">
                 {%if not user.is_authenticated%}
                     <div class="text-center">
@@ -56,10 +50,6 @@
                     </div>
                 {%endif%}
             </div>
-
-
-
-
             {%if user.is_authenticated%}
                 <div class="col-sm-2">
                     <div class="text-center">
@@ -77,23 +67,23 @@
     </div>
 
     <div id="rad2">
-    <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10" id="whitebox">
-    <form method="POST" name="DateForm" action="{%url 'se_rom' %}">
-    {%csrf_token%}
-    <h5>Her velger du dato for oppholdet:</h5>
-    <input type="date" class="form-control" id="datePicker" placeholder="Startdato" name="req_startdate">
-    <h5>Til:</h5>
-    <!--################hermåttejegleggeendivrundtinputenforåklareåoverkjørebootstrap-stylenogfålittmarginmellomknappoginput.FJERNETALTSÅDENNEDIV'N-->
-    <!--##OOOBSfantutatduhvisduleggerlinkentildittegetstilarkøverst,skaldetordneseg.-->
-    <input type="date" class="form-control" placeholder="Sluttdato" id="datePicker2" name="req_sluttdate">
-    <input type="number" value="1" class="form-control" placeholder="Antall" name="req_cap">
-    <button type ="submit" name=" Se_tigjengelige_rom" class="btn btn-dark">Se tilgjengelige    rom</button>
-    </form>
-    </div>
-    <div class="col-sm-1"></div>
-    </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10" id="whitebox">
+                <form method="POST" name="DateForm" action="{%url 'se_rom' %}">
+                    {%csrf_token%}
+                    <h5>Her velger du dato for oppholdet:</h5>
+                    <input type="date" class="form-control" id="datePicker" placeholder="Startdato" name="req_startdate">
+                    <h5>Til:</h5>
+                    <!--################hermåttejegleggeendivrundtinputenforåklareåoverkjørebootstrap-stylenogfålittmarginmellomknappoginput.FJERNETALTSÅDENNEDIV'N-->
+                    <!--##OOOBSfantutatduhvisduleggerlinkentildittegetstilarkøverst,skaldetordneseg.-->
+                    <input type="date" class="form-control" placeholder="Sluttdato" id="datePicker2" name="req_sluttdate">
+                    <input type="number" value="1" class="form-control" placeholder="Antall" name="req_cap">
+                    <button type ="submit" name=" Se_tigjengelige_rom" class="btn btn-dark">Se tilgjengelige    rom</button>
+                </form>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
     </div>
     <!--funksjonalitetforåsettedatoverdieneiinput-feltene-->
     <script>

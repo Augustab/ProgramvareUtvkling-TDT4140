@@ -1,3 +1,4 @@
+'''bestemmer hvordan admin-siden ser ut'''
 from django.contrib import admin
 from .models import Room, Booking
 

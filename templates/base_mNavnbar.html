@@ -4,23 +4,12 @@
     <meta charset="UTF-8">
     {% block style %}{% endblock %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
     <title>{% block title %}base_mNavbar{% endblock %}</title>
 </head>
 <body>
-
-<!--
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="height: 100px">
-          <a href="" id="logo" style=""><img src="../static/images/Hotell_logo.png" alt="Hotell logo"> </a>
-</nav>
--->
-
-<nav id="topNav" class="navbar  navbar-toggleable-sm navbar-inverse bg-dark">
-
-    <a class="navbar-brand mx-auto" href="{%  url "home" %}"><img src="../static/images/Hotell_logo2.png" alt=""></a>
-</nav>
-
-<!-- Det er inni blocken under at selve innholdet til nettsidene som extender base kommer. -->
+    <nav id="topNav" class="navbar  navbar-toggleable-sm navbar-inverse bg-dark">
+        <a class="navbar-brand mx-auto" href="{%  url "home" %}"><img src="../static/images/Hotell_logo2.png" alt=""></a>
+    </nav>
     {% block content %}
     {% endblock %}
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
