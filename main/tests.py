@@ -1,3 +1,4 @@
+'''Her finner du våre automatiske tester'''
 from django.test import TestCase, Client
 from main.models import Room
 from django.urls import reverse
