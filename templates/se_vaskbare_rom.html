@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-<!--SE I BUNN for message-funksjonaliteten-->
-
 {% block title %}Vaskbare rom{% endblock %}
 {% block style %}
     <link rel="stylesheet" href="../static/css/register.css">
@@ -10,7 +8,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
     <div class = "row" >
         <div class = "col-sm-4"></div>
         <div class = "col-sm-4" id="col-venstre">
@@ -52,14 +49,12 @@
         </div>
         <div class="col-sm-1"></div>
     </div>
-<!--DET EE denne koden som sørger for at messages blir displayed om de finnes!!! -->
 
     {% if messages %}
-   <script>
-    {% for message in messages %}
-        alert("{{ message }}");
-    {% endfor %}
-   </script>
+        <script>
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        </script>
     {% endif %}
-
 {% endblock %}

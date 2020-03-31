@@ -27,6 +27,7 @@ urlpatterns = [
     path("se_bestillinger/", v2.se_booking, name="se_bestillinger"),
     path("slett_booking/", v2.slett_booking, name="slett_booking"),
     path("vaskehjelp/", v2.vaskehjelp, name="vaskehjelp"),
+    path("statistikk", v2.statistikk, name="statistikk"),
     path('', v2.redirect, name="homeredirectfraingenting"),
     path('', include("django.contrib.auth.urls")),
 ]
