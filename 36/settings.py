@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import psycopg2
 
 ####### SE I BUNN FOR NY KODE
 
@@ -27,8 +28,10 @@ SECRET_KEY = 'rjagq)$=!w7pk-3z96^0=7_e*6yhkf2a6k9jcxws7*(n$=n*yo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['skikkeligfancy-hotell.herokuapp.com']
 
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Application definition
 
@@ -46,8 +49,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -150,3 +153,6 @@ EMAIL_HOST_USER = 'skikkeligfancyhotell@gmail.com'
 EMAIL_HOST_PASSWORD = 'fancyhotell'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
