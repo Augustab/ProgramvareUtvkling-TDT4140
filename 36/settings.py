@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import psycopg2
+import dj_database_url
+
 
 ####### SE I BUNN FOR NY KODE
 
@@ -26,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rjagq)$=!w7pk-3z96^0=7_e*6yhkf2a6k9jcxws7*(n$=n*yo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['skikkeligfancy-hotell.herokuapp.com']
 
@@ -86,12 +88,8 @@ WSGI_APPLICATION = '36.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(default='postgres://xiuzpjdagntaua:75469a78bb4730b1e7b1da4f36460a9adb08ae364ff9a28eca58c4f79c91d6e0@ec2-54-210-128-153.compute-1.amazonaws.com:5432/d4ana1nhehbd5d')
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -154,5 +152,4 @@ EMAIL_HOST_PASSWORD = 'fancyhotell'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
