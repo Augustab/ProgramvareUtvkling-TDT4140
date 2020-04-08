@@ -12,6 +12,5 @@ test:
   allow_failure: true
   script:
     - python manage.py collectstatic
-    - yes
     - python manage.py test
 
