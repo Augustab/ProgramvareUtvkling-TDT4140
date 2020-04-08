@@ -30,7 +30,7 @@ SECRET_KEY = 'rjagq)$=!w7pk-3z96^0=7_e*6yhkf2a6k9jcxws7*(n$=n*yo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['skikkeligfancy-hotell.herokuapp.com']
+ALLOWED_HOSTS = ['skikkeligfancy-hotell.herokuapp.com', '127.0.0.1']
 
 #DATABASE_URL = os.environ['DATABASE_URL']
 #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -86,10 +86,30 @@ WSGI_APPLICATION = '36.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+#dj_database_url.config(default='postgres://xiuzpjdagntaua:75469a78bb4730b1e7b1da4f36460a9adb08ae364ff9a28eca58c4f79c91d6e0@ec2-54-210-128-153.compute-1.amazonaws.com:5432/d4ana1nhehbd5d'),
+#DATABASES = {
+#    'default': {
+#        dj_database_url.config(default='postgres://xiuzpjdagntaua:75469a78bb4730b1e7b1da4f36460a9adb08ae364ff9a28eca58c4f79c91d6e0@ec2-54-210-128-153.compute-1.amazonaws.com:5432/d4ana1nhehbd5d'),
+#    }
+#}
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://xiuzpjdagntaua:75469a78bb4730b1e7b1da4f36460a9adb08ae364ff9a28eca58c4f79c91d6e0@ec2-54-210-128-153.compute-1.amazonaws.com:5432/d4ana1nhehbd5d')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'TEST': {
+            'NAME': 'd4ana1nhehbd5d',
+        },
+    }
 }
+
+DATABASE_URL = 'postgres://xiuzpjdagntaua:75469a78bb4730b1e7b1da4f36460a9adb08ae364ff9a28eca58c4f79c91d6e0@ec2-54-210-128-153.compute-1.amazonaws.com:5432/d4ana1nhehbd5d'
+#DATABASE_URL = 'postgres://xiuzpjdagntaua:75469a78bb4730b1e7b1da4f36460a9adb08ae364ff9a28eca58c4f79c91d6e0@ec2-54-210-128-153.compute-1.amazonaws.com:5432/d4ana1nhehbd5d' python manage.py test --keepdb
+
+
+# Heroku: Update database configuration from $DATABASE_URL.
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
