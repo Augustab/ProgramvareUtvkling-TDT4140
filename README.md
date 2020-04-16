@@ -69,15 +69,17 @@ Her er et diagram som viser de viktigste delene av mappestrukturen:
 
 
 ### Testing
-I prosjektet er det flere funksjoner og elementer som er kritiske og som ***må*** fungere for at nettsiden kan brukes ordentlig. Dermed har vi laget tester som dekker det kritiske som må fungere, bl.a. booking-funksjonen. Vi har i tillegg to typer tester: manuelle tester som vi skriver og sjekker selv, og automatiske tester som tester uten at vi trenger å bekymre oss.
+I prosjektet er det flere funksjoner og elementer som er kritiske og som ***må*** fungere for at nettsiden kan brukes ordentlig. Dermed har vi laget tester som dekker det kritiske som må fungere, bl.a. booking-funksjonen. Vi har i tillegg to typer tester: manuelle tester, som vi skriver og sjekker selv, og automatiske tester som tester uten at vi trenger å bekymre oss.
 
 ##### Automatisk testing
-De automatiske testene dekker kodekvalitet, kompabilitet og funksjonalitet. PyCharm har mange innebygde tester som tester hver gang en prosess blir kjørt. Hvis noe er galt med prosessen, vil PyCharm sende en error-melding, som oftest med detaljert informasjon om hva som var feil og hvor feilen ligger.  
-I tillegg til de innebygde testene til PyCharm, har vi også implementert CI i gitlab-prosjektet vårt. CI tester kompabiliteten til koden du skal til å *pushe* inn til prosjektet, og er til som en forsikring om at hele prosjektet ikke blir ødelagt av en feilbar *push*.
+De automatiske testene dekker kodekvalitet, kompabilitet og funksjonalitet. Vi har også implementert CI i gitlab-prosjektet vårt. CI tester kompabiliteten til koden du skal til å *pushe* inn til prosjektet, og er til som en forsikring om at hele prosjektet ikke blir ødelagt av en feilbar *push*.
 **For å kjøre testene vi har skrevet selv, åpner du terminalen og skriver:**
 ```
 py manage.py test
 ```
+
+##### Manuell testing
+PyCharm har mange innebygde tester som tester hver gang en prosess blir kjørt. Hvis noe er galt med prosessen, vil PyCharm sende en error-melding, som oftest med detaljert informasjon om hva som var feil og hvor feilen ligger. 
 
 ### Kjøre applikasjonen
 
@@ -86,14 +88,15 @@ Kjør koden i terminalen
 ```
 py manage.py runserver
 ```
-I databasen finner du flere forskjellige typer brukere som "augbi"(admin), "investor", "vaskehjelp", "booker", der alle har passord: "passord123". Gjennom disse brukerne får du testet nettsidens komplette funksjonalitet.
+I databasen finner du flere forskjellige typer brukere som "augbi"(admin), "investor", "vaskehjelp", "booker", der alle har passord: "passord123". Gjennom disse brukerne får du testet nettsidens komplette funksjonalitet. 
+
 For å stenge ned serveren, holder du CTRL+C
 
 **For å lage en ny administrator på den lokale nettsiden, skriver du:**
 ```
 py manage.py createsuperuser
 ```
-Deretter fyller du ut informasjonen som Django spør etter.
+Deretter fyller du ut informasjonen som Django spør om.
 ##### Nettsiden
 Det kan ta litt tid å starte opp serveren første gang du går inn på nettsiden.
 https://skikkeligfancy-hotell.herokuapp.com/
@@ -119,7 +122,7 @@ Admin-brukeren på nettsiden heter "gruppe36" og passord "passord123". Ellers er
 - Mads Bråten Eliassen (Utvikler)
 - Stefan Magnus Xara Brazil Fongen (Utvikler)
 
-[//]: #
+[//]: 
 
 [Python 3.8 Windows]: <https://www.python.org/ftp/python/3.8.2/python-3.8.2-amd64.exe>
 [Python 3.8 Mac]: <https://www.python.org/ftp/python/3.8.2/python-3.8.2-macosx10.9.pkg>
