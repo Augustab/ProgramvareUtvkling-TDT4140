@@ -69,7 +69,7 @@ Her er et diagram som viser de viktigste delene av mappestrukturen:
 
 
 ### Testing
-I prosjektet er det flere funksjoner og elementer som er kritiske og som ***må*** fungere for at nettsiden kan brukes ordentlig. Dermed har vi laget tester som dekker det kritiske som må fungere, bl.a. booking-funksjonen. Vi har i tillegg to typer tester: manuelle tester, som vi skriver og sjekker selv, og automatiske tester som tester uten at vi trenger å bekymre oss.
+I prosjektet er det flere funksjoner og elementer som er kritiske og som ***må*** fungere for at nettsiden kan brukes ordentlig. Dermed har vi laget tester som dekker det kritiske som må fungere, bl.a. booking-funksjonen. Vi har har to typer tester: manuelle tester og automatiske tester.
 
 ##### Automatisk testing
 De automatiske testene dekker kodekvalitet, kompabilitet og funksjonalitet. Vi har også implementert CI i gitlab-prosjektet vårt. CI tester kompabiliteten til koden du skal til å *pushe* inn til prosjektet, og er til som en forsikring om at hele prosjektet ikke blir ødelagt av en feilbar *push*.
@@ -79,8 +79,7 @@ py manage.py test
 ```
 
 ##### Manuell testing
-PyCharm har mange innebygde tester som tester hver gang en prosess blir kjørt. Hvis noe er galt med prosessen, vil PyCharm sende en error-melding, som oftest med detaljert informasjon om hva som var feil og hvor feilen ligger. 
-
+Manuelle tester gjennomfører vi fra tid til annen ved å kjøre applikasjonen og se at alt fungerer som det skal.
 ### Kjøre applikasjonen
 
 ##### Lokalt
@@ -88,7 +87,7 @@ Kjør koden i terminalen
 ```
 py manage.py runserver
 ```
-I databasen finner du flere forskjellige typer brukere som "augbi"(admin), "investor", "vaskehjelp", "booker", der alle har passord: "passord123". Gjennom disse brukerne får du testet nettsidens komplette funksjonalitet. 
+I databasen finner du flere forskjellige typer brukere som "augbi"(admin), "investor", "vaskehjelp", "booker", der alle har passord: "passord123". Gjennom disse brukerne får du testet all funksjonalitet til nettsiden. 
 
 For å stenge ned serveren, holder du CTRL+C
 
