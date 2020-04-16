@@ -5,7 +5,7 @@
 
 ### Introduksjon
 
-Gruppe 36 i Programvareutvikling (TDT4140) har i løpet av dette semesteret laget en nettside for hotellet "Skikkelig Fancy Hotell". Nettsiden er ment å gjøre det lettere for hotellet å ta imot bestillinger og ha oversikt over hvem som bor på hotellet, og når de bor der. Det skal være mulig å opprette en bruker, bestille/avbestille et rom og ikke minst se tilgjengelige rom. Admin skal ha mulighet til å legge til/fjerne rom og ha oversikt over ansatte og opptatte rom. Investorer og vaskehjelper vil også ha egen funksjonalitet.
+Gruppe 36 i Programvareutvikling (TDT4140) har i løpet av dette semesteret laget en nettside for hotellet "Skikkelig Fancy Hotell". Nettsiden er ment å gjøre det lettere for hotellet å ta imot bestillinger og ha oversikt over hvem som bor på hotellet, og når de bor der. Det skal være mulig å opprette en bruker, bestille/avbestille et rom og ikke minst se tilgjengelige rom. Admin skal ha mulighet til å legge til/fjerne rom, samt ha oversikt over bookinger og ansatte. Investorer og vaskehjelper vil også ha egen funksjonalitet.
 
 #### Hva trenger du?
 ###### Python (Programmeringsspråket)
