@@ -1,4 +1,4 @@
-![Logo](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/36/-/raw/master/static/images/Hotell_logo2.png)
+![Logo](https://github.com/Augustab/ProgramvareUtvkling-TDT4140/blob/master/static/images/Hotell_logo2.png?raw=true)
 
 
 # Programvareutvikling - Gruppe 36
