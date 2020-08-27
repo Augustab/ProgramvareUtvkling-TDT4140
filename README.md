@@ -63,7 +63,7 @@ Du kan teste hvordan applikasjonen ser ut (se "Kjøre applikasjonen" (Lokalt))
 ### Mappestruktur
 Her er et diagram som viser de viktigste delene av mappestrukturen:
 
-![Diagram](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/36/-/raw/demo2/static/images/diagram.png)
+![Diagram](https://github.com/Augustab/ProgramvareUtvkling-TDT4140/blob/master/static/images/diagram.png?raw=true)
 
 **Mappen *untitled1* er root-filen.**
 
